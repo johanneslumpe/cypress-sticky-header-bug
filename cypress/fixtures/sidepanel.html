@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<!-- saved from url=(0023)http://localhost:8445/# -->
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+      body {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      .fixed-application-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        z-index: 10;
+        background-color: red;
+      }
+
+      .overlay-background {
+        /*
+          This is the culprit. Setting `position` to `absolute` allows cypress to properly scroll to the element,
+          taking the stikcky header into account.
+          
+          `fixed` will prompt cypress to scroll the element too far up, so it will be hidden behind the sticky headers,
+          resulting in an error regarding an obscured element.
+        */
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+        background: rgba(0, 0, 0, 0.5);
+      }
+
+      .sidepanel {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 300px;
+        height: calc(100vh - 60px);
+        overflow: auto;
+        background: green;
+      }
+
+      .sticky-header {
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 36px;
+        z-index: 10;
+        background-color: blue;
+        color: white;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="fixed-application-header">
+      fixed application header
+    </div>
+    <div class="overlay-background">
+      <div class="sidepanel">
+        <section>
+          <header class="sticky-header">
+            sticky header A
+          </header>
+          <div style="padding: 10px">
+            <table>
+              <tbody>
+                <tr>
+                  <td>a</td>
+                  <td>a</td>
+                  <td>a</td>
+                  <td>a</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>b</td>
+                  <td>b</td>
+                  <td>b</td>
+                </tr>
+                <tr>
+                  <td>c</td>
+                  <td>c</td>
+                  <td>c</td>
+                  <td>c</td>
+                </tr>
+                <tr>
+                  <td>d</td>
+                  <td>d</td>
+                  <td>d</td>
+                  <td>d</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section>
+          <header class="sticky-header">
+            sticky header B
+          </header>
+          <div style="padding: 10px">
+            <table>
+              <tbody>
+                <tr>
+                  <td>a</td>
+                  <td>a</td>
+                  <td>a</td>
+                  <td>a</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>b</td>
+                  <td>b</td>
+                  <td>b</td>
+                </tr>
+                <tr>
+                  <td>c</td>
+                  <td>c</td>
+                  <td>c</td>
+                  <td>c</td>
+                </tr>
+                <tr>
+                  <td>d</td>
+                  <td>d</td>
+                  <td>d</td>
+                  <td>d</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section>
+          <header class="sticky-header">
+            sticky header C
+          </header>
+          <div style="padding: 10px">
+            <table>
+              <tbody>
+                <tr>
+                  <td>a</td>
+                  <td>a</td>
+                  <td>a</td>
+                  <td>a</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>b</td>
+                  <td>b</td>
+                  <td>b</td>
+                </tr>
+                <tr>
+                  <td>c</td>
+                  <td>c</td>
+                  <td>c</td>
+                  <td>c</td>
+                </tr>
+                <tr>
+                  <td>d</td>
+                  <td>d</td>
+                  <td>d</td>
+                  <td>d</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section>
+          <header class="sticky-header">
+            sticky header D
+          </header>
+          <div style="padding: 10px">
+            <table>
+              <tbody>
+                <tr>
+                  <td>a</td>
+                  <td>a</td>
+                  <td>a</td>
+                  <td>a</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>b</td>
+                  <td>b</td>
+                  <td>b</td>
+                </tr>
+                <tr>
+                  <td>c</td>
+                  <td>c</td>
+                  <td>c</td>
+                  <td>c</td>
+                </tr>
+                <tr>
+                  <td>d</td>
+                  <td>d</td>
+                  <td>d</td>
+                  <td>d</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
